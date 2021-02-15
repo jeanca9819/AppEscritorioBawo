@@ -52,7 +52,7 @@ public class Main extends javax.swing.JFrame {
         Panel.setBackground(new java.awt.Color(244, 130, 50));
 
         jlModules.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jlModules.setText("Módulos");
+        jlModules.setText("¡Te damos la bienvenida!");
 
         btnBusiness.setText("Empresa");
         btnBusiness.addActionListener(new java.awt.event.ActionListener() {
@@ -62,8 +62,18 @@ public class Main extends javax.swing.JFrame {
         });
 
         btnCategory.setText("Categoría");
+        btnCategory.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCategoryActionPerformed(evt);
+            }
+        });
 
         btnProducts.setText("Productos");
+        btnProducts.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnProductsActionPerformed(evt);
+            }
+        });
 
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/out.png"))); // NOI18N
 
@@ -85,11 +95,11 @@ public class Main extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelLayout.createSequentialGroup()
-                        .addComponent(jlModules, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(251, 251, 251))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelLayout.createSequentialGroup()
                         .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(39, 39, 39))))
+                        .addGap(39, 39, 39))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelLayout.createSequentialGroup()
+                        .addComponent(jlModules)
+                        .addGap(195, 195, 195))))
         );
         PanelLayout.setVerticalGroup(
             PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -101,9 +111,9 @@ public class Main extends javax.swing.JFrame {
                     .addGroup(PanelLayout.createSequentialGroup()
                         .addGap(26, 26, 26)
                         .addComponent(jButton1)
-                        .addGap(21, 21, 21)
+                        .addGap(25, 25, 25)
                         .addComponent(jlModules, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(48, 48, 48)
+                        .addGap(44, 44, 44)
                         .addComponent(btnBusiness, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnCategory, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -132,8 +142,25 @@ public class Main extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnBusinessActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBusinessActionPerformed
-        // TODO add your handling code here:
+        this.setVisible(false);
+        Business business = new Business();
+        business.setLocationRelativeTo(null);
+        business.setVisible(true);
     }//GEN-LAST:event_btnBusinessActionPerformed
+
+    private void btnCategoryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCategoryActionPerformed
+        this.setVisible(false);
+        Category category = new Category();
+        category.setLocationRelativeTo(null);
+        category.setVisible(true);
+    }//GEN-LAST:event_btnCategoryActionPerformed
+
+    private void btnProductsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProductsActionPerformed
+        this.setVisible(false);
+        Product product = new Product();
+        product.setLocationRelativeTo(null);
+        product.setVisible(true);
+    }//GEN-LAST:event_btnProductsActionPerformed
 
     /**
      * @param args the command line arguments
