@@ -1,11 +1,11 @@
 package manejobd;
 
-import gui.Login;
+import gui.InicioSesion;
 
 public class ManejoBD {
 
     public static void main(String[] args) {
-        Login login = new Login();
+        InicioSesion login = new InicioSesion();
         login.setLocationRelativeTo(null);
         login.setVisible(true);
     }
