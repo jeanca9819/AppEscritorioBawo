@@ -1,23 +1,14 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package gui;
 
+import business.UsuarioBusiness;
 import java.awt.Image;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 
-/**
- *
- * @author jeanc
- */
 public class InicioSesion extends javax.swing.JFrame {
-
-    /**
-     * Creates new form Login
-     */
+    
+    UsuarioBusiness usuarioBusiness = new UsuarioBusiness();
+    
     public InicioSesion() {
         initComponents();
         ImageIcon image = new ImageIcon(getClass().getResource("/images/logo.png"));
@@ -38,11 +29,12 @@ public class InicioSesion extends javax.swing.JFrame {
         Panel = new javax.swing.JPanel();
         jlLogo = new javax.swing.JLabel();
         jlLogin = new javax.swing.JLabel();
-        jtfPassword = new javax.swing.JTextField();
         jtfUser = new javax.swing.JTextField();
         jlUser = new javax.swing.JLabel();
         jlPassword = new javax.swing.JLabel();
         btnLogin = new javax.swing.JButton();
+        jtfPassword = new javax.swing.JPasswordField();
+        jlMessage = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Inicio de Sesión");
@@ -68,6 +60,9 @@ public class InicioSesion extends javax.swing.JFrame {
             }
         });
 
+        jlMessage.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jlMessage.setForeground(new java.awt.Color(255, 51, 51));
+
         javax.swing.GroupLayout PanelLayout = new javax.swing.GroupLayout(Panel);
         Panel.setLayout(PanelLayout);
         PanelLayout.setHorizontalGroup(
@@ -77,19 +72,21 @@ public class InicioSesion extends javax.swing.JFrame {
                 .addComponent(jlLogo, javax.swing.GroupLayout.PREFERRED_SIZE, 374, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(PanelLayout.createSequentialGroup()
+                        .addGap(227, 227, 227)
+                        .addComponent(btnLogin))
+                    .addGroup(PanelLayout.createSequentialGroup()
                         .addGap(83, 83, 83)
                         .addGroup(PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(PanelLayout.createSequentialGroup()
-                                .addComponent(jlUser)
-                                .addGap(38, 38, 38)
-                                .addComponent(jtfUser, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(PanelLayout.createSequentialGroup()
-                                .addComponent(jlPassword)
-                                .addGap(18, 18, 18)
-                                .addComponent(jtfPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addGroup(PanelLayout.createSequentialGroup()
-                        .addGap(227, 227, 227)
-                        .addComponent(btnLogin)))
+                            .addComponent(jlMessage)
+                            .addGroup(PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addGroup(PanelLayout.createSequentialGroup()
+                                    .addComponent(jlUser)
+                                    .addGap(38, 38, 38)
+                                    .addComponent(jtfUser, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(PanelLayout.createSequentialGroup()
+                                    .addComponent(jlPassword)
+                                    .addGap(18, 18, 18)
+                                    .addComponent(jtfPassword))))))
                 .addContainerGap(161, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -101,12 +98,13 @@ public class InicioSesion extends javax.swing.JFrame {
             .addGroup(PanelLayout.createSequentialGroup()
                 .addGap(84, 84, 84)
                 .addComponent(jlLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jlLogo, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(PanelLayout.createSequentialGroup()
+                        .addGap(23, 23, 23)
+                        .addComponent(jlMessage)
                         .addGap(18, 18, 18)
-                        .addComponent(jlLogo, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(PanelLayout.createSequentialGroup()
-                        .addGap(66, 66, 66)
                         .addGroup(PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jlUser)
                             .addComponent(jtfUser, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -116,7 +114,7 @@ public class InicioSesion extends javax.swing.JFrame {
                             .addComponent(jtfPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(71, 71, 71)
                         .addComponent(btnLogin)))
-                .addContainerGap(282, Short.MAX_VALUE))
+                .addContainerGap(288, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -138,10 +136,21 @@ public class InicioSesion extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
-        this.setVisible(false);
-        Principal main = new Principal();
-        main.setLocationRelativeTo(null);
-        main.setVisible(true);
+
+        String usuario = jtfUser.getText();
+        String contrasenna = String.valueOf(jtfPassword.getPassword());
+        if (this.usuarioBusiness.getUser(usuario, contrasenna)) {
+            this.setVisible(false);
+            Principal main = new Principal();
+            main.setLocationRelativeTo(null);
+            main.setVisible(true);
+            jlMessage.setText("");
+        }else{
+            jlMessage.setText("No existe el usuario, pruebe nuevamente.");
+        }
+        
+        jtfUser.setText("");
+        jtfPassword.setText("");
     }//GEN-LAST:event_btnLoginActionPerformed
 
     /**
@@ -185,9 +194,10 @@ public class InicioSesion extends javax.swing.JFrame {
     private javax.swing.JButton btnLogin;
     private javax.swing.JLabel jlLogin;
     private javax.swing.JLabel jlLogo;
+    private javax.swing.JLabel jlMessage;
     private javax.swing.JLabel jlPassword;
     private javax.swing.JLabel jlUser;
-    private javax.swing.JTextField jtfPassword;
+    private javax.swing.JPasswordField jtfPassword;
     private javax.swing.JTextField jtfUser;
     // End of variables declaration//GEN-END:variables
 }
