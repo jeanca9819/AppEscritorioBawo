@@ -47,7 +47,7 @@ public class Producto extends javax.swing.JFrame {
         jlSearch = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Inicio de Sesión");
+        setTitle("Producto");
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         setForeground(java.awt.Color.black);
         setResizable(false);
@@ -78,6 +78,11 @@ public class Producto extends javax.swing.JFrame {
         });
 
         jbnBack.setText("Volver");
+        jbnBack.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbnBackActionPerformed(evt);
+            }
+        });
 
         btnSearch.setText("Buscar");
 
@@ -160,6 +165,13 @@ public class Producto extends javax.swing.JFrame {
         addProduct.setLocationRelativeTo(null);
         addProduct.setVisible(true);
     }//GEN-LAST:event_btnAddActionPerformed
+
+    private void jbnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbnBackActionPerformed
+        this.setVisible(false);
+        Principal main = new Principal();
+        main.setLocationRelativeTo(null);
+        main.setVisible(true);
+    }//GEN-LAST:event_jbnBackActionPerformed
 
     /**
      * @param args the command line arguments

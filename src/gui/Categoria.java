@@ -47,7 +47,7 @@ public class Categoria extends javax.swing.JFrame {
         jlAdd = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Inicio de Sesión");
+        setTitle("Categoría");
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         setForeground(java.awt.Color.black);
         setResizable(false);
@@ -73,6 +73,11 @@ public class Categoria extends javax.swing.JFrame {
         btnAdd.setText("Agregar");
 
         btnBack.setText("Volver");
+        btnBack.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBackActionPerformed(evt);
+            }
+        });
 
         jlName.setText("Nombre:");
 
@@ -144,6 +149,12 @@ public class Categoria extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
+        this.setVisible(false);
+        Principal main = new Principal();
+        main.setLocationRelativeTo(null);
+    }//GEN-LAST:event_btnBackActionPerformed
 
     /**
      * @param args the command line arguments

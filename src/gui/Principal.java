@@ -44,7 +44,7 @@ public class Principal extends javax.swing.JFrame {
         btLog = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Inicio de Sesión");
+        setTitle("Principal");
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         setForeground(java.awt.Color.black);
         setResizable(false);
@@ -76,6 +76,11 @@ public class Principal extends javax.swing.JFrame {
         });
 
         btLog.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/out.png"))); // NOI18N
+        btLog.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btLogActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout PanelLayout = new javax.swing.GroupLayout(Panel);
         Panel.setLayout(PanelLayout);
@@ -161,6 +166,13 @@ public class Principal extends javax.swing.JFrame {
         product.setLocationRelativeTo(null);
         product.setVisible(true);
     }//GEN-LAST:event_btnProductsActionPerformed
+
+    private void btLogActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btLogActionPerformed
+        this.setVisible(false);
+        InicioSesion sesion = new InicioSesion();
+        sesion.setLocationRelativeTo(null);
+        sesion.setVisible(true);
+    }//GEN-LAST:event_btLogActionPerformed
 
     /**
      * @param args the command line arguments

@@ -56,7 +56,7 @@ public class ActualizarProducto extends javax.swing.JFrame {
         jcbCategory = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Inicio de Sesión");
+        setTitle("Actualizar Producto");
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         setForeground(java.awt.Color.black);
         setResizable(false);
@@ -94,6 +94,11 @@ public class ActualizarProducto extends javax.swing.JFrame {
         btnUpdate.setText("Actualizar");
 
         btnBack.setText("Volver");
+        btnBack.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBackActionPerformed(evt);
+            }
+        });
 
         jlDescription.setText("Descripción: ");
 
@@ -229,6 +234,13 @@ public class ActualizarProducto extends javax.swing.JFrame {
     private void jtfPriceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfPriceActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jtfPriceActionPerformed
+
+    private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
+        this.setVisible(false);
+        Producto producto = new Producto();
+        producto.setLocationRelativeTo(null);
+        producto.setVisible(true);
+    }//GEN-LAST:event_btnBackActionPerformed
 
     /**
      * @param args the command line arguments

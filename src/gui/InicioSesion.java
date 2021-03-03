@@ -139,14 +139,18 @@ public class InicioSesion extends javax.swing.JFrame {
 
         String usuario = jtfUser.getText();
         String contrasenna = String.valueOf(jtfPassword.getPassword());
-        if (this.usuarioBusiness.getUser(usuario, contrasenna)) {
-            this.setVisible(false);
-            Principal main = new Principal();
-            main.setLocationRelativeTo(null);
-            main.setVisible(true);
-            jlMessage.setText("");
+        if (usuario.equals("") || contrasenna.equals("")) {
+            jlMessage.setText("Llene todos los campos por favor.");
         }else{
-            jlMessage.setText("No existe el usuario, pruebe nuevamente.");
+            if (this.usuarioBusiness.getUser(usuario, contrasenna)) {
+                this.setVisible(false);
+                Principal main = new Principal();
+                main.setLocationRelativeTo(null);
+                main.setVisible(true);
+                jlMessage.setText("");
+            }else{
+                jlMessage.setText("No existe el usuario, pruebe nuevamente.");
+            }
         }
         
         jtfUser.setText("");

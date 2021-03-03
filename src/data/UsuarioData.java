@@ -1,7 +1,7 @@
 package data;
 
+import com.mysql.jdbc.CallableStatement;
 import com.mysql.jdbc.Connection;
-import com.mysql.jdbc.Statement;
 import java.sql.ResultSet;
 
 public class UsuarioData {
@@ -11,13 +11,16 @@ public class UsuarioData {
     
     public boolean getUser(String usuario, String contrasenna){
 
-        String sql = "SELECT * FROM BawoDev.Usuario WHERE usuario='"+usuario+"' AND contrasenna='"+contrasenna+"'  ";
-        
+        String query = "{ call get_user(?,?) }";
+        ResultSet rs;
         boolean result = false; 
         
         try{
-            Statement statement = (Statement) connection.createStatement();
-            ResultSet rs = statement.executeQuery(sql);
+            CallableStatement stmt = (CallableStatement) connection.prepareCall(query);
+            stmt.setString(1, usuario);
+            stmt.setString(2, contrasenna);
+            
+            rs = stmt.executeQuery();
             
             if (rs.next()) {
                 
