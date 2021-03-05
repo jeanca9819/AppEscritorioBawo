@@ -16,7 +16,7 @@ public class CategoriaBusiness {
     return this.categoriaData.updateVisibility(categoria);
     }
     
-    public int addCategory(Categoria categoria){
+    public int addCategory(String categoria){
     return this.categoriaData.addCategory(categoria);
     }
 }

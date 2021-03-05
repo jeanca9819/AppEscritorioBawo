@@ -1,23 +1,14 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package gui;
 
+import business.CategoriaBusiness;
 import java.awt.Image;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 
-/**
- *
- * @author jeanc
- */
 public class Categoria extends javax.swing.JFrame {
 
-    /**
-     * Creates new form Login
-     */
+    CategoriaBusiness categoriaBusiness = new CategoriaBusiness();
+    
     public Categoria() {
         initComponents();
         ImageIcon image = new ImageIcon(getClass().getResource("/images/logo.png"));
@@ -45,6 +36,8 @@ public class Categoria extends javax.swing.JFrame {
         jtfName = new javax.swing.JTextField();
         jlName = new javax.swing.JLabel();
         jlAdd = new javax.swing.JLabel();
+        jlMessageError = new javax.swing.JLabel();
+        jlMessageSuccess = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Categoría");
@@ -71,6 +64,11 @@ public class Categoria extends javax.swing.JFrame {
         jScrollPane6.setViewportView(jtCategory);
 
         btnAdd.setText("Agregar");
+        btnAdd.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAddActionPerformed(evt);
+            }
+        });
 
         btnBack.setText("Volver");
         btnBack.addActionListener(new java.awt.event.ActionListener() {
@@ -83,6 +81,12 @@ public class Categoria extends javax.swing.JFrame {
 
         jlAdd.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jlAdd.setText("Agregar nueva categoría");
+
+        jlMessageError.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jlMessageError.setForeground(new java.awt.Color(255, 0, 0));
+
+        jlMessageSuccess.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jlMessageSuccess.setForeground(new java.awt.Color(51, 255, 0));
 
         javax.swing.GroupLayout PanelLayout = new javax.swing.GroupLayout(Panel);
         Panel.setLayout(PanelLayout);
@@ -97,6 +101,8 @@ public class Categoria extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelLayout.createSequentialGroup()
                 .addContainerGap(291, Short.MAX_VALUE)
                 .addGroup(PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jlMessageSuccess)
+                    .addComponent(jlMessageError)
                     .addComponent(jlAdd)
                     .addGroup(PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(PanelLayout.createSequentialGroup()
@@ -123,13 +129,17 @@ public class Categoria extends javax.swing.JFrame {
                 .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 304, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jlAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGap(3, 3, 3)
+                .addComponent(jlMessageSuccess)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jlName)
                     .addComponent(jtfName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnAdd)
                     .addComponent(btnBack))
-                .addContainerGap(207, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(jlMessageError)
+                .addContainerGap(175, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -155,6 +165,24 @@ public class Categoria extends javax.swing.JFrame {
         Principal main = new Principal();
         main.setLocationRelativeTo(null);
     }//GEN-LAST:event_btnBackActionPerformed
+
+    private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
+        String categoria = jtfName.getText();
+        
+        if (categoria.equals("")) {
+            jlMessageError.setText("Llene el campo solicitado por favor.");
+            jlMessageSuccess.setText(""); 
+        }else{
+            if (this.categoriaBusiness.addCategory(categoria) == 1) {
+                jlMessageSuccess.setText("Se ingresó correctamente la categoría.");  
+                jlMessageError.setText("");
+            }else{
+                jlMessageError.setText("Hubo un problema al ingresar la categoría, intenta de nuevo.");
+                jlMessageSuccess.setText(""); 
+            }
+        }
+        jtfName.setText("");
+    }//GEN-LAST:event_btnAddActionPerformed
 
     /**
      * @param args the command line arguments
@@ -206,6 +234,8 @@ public class Categoria extends javax.swing.JFrame {
     private javax.swing.JLabel jlAdd;
     private javax.swing.JLabel jlCategories;
     private javax.swing.JLabel jlLogo;
+    private javax.swing.JLabel jlMessageError;
+    private javax.swing.JLabel jlMessageSuccess;
     private javax.swing.JLabel jlName;
     private javax.swing.JTable jtCategory;
     private javax.swing.JTextField jtfName;

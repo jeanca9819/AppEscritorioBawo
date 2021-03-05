@@ -11,7 +11,7 @@ public class UsuarioData {
     
     public boolean getUser(String usuario, String contrasenna){
 
-        String query = "{ call get_user(?,?) }";
+        String query = "{ call getUsuario(?,?) }";
         ResultSet rs;
         boolean result = false; 
         

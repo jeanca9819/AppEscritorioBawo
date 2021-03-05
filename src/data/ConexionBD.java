@@ -16,7 +16,6 @@ public class ConexionBD {
         try {
             Class.forName(utilities.driver);
             connection = (Connection) DriverManager.getConnection(utilities.url, utilities.user, utilities.password);
-            System.out.println("Conexion Exitosa");
         }
         catch (ClassNotFoundException | SQLException e){
             System.out.println("Error de conexion" + e.getMessage());
