@@ -1,29 +1,42 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package gui;
 
+import business.CategoriaBusiness;
+import business.ProductoBusiness;
 import java.awt.Image;
+import java.util.ArrayList;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 
-/**
- *
- * @author jeanc
- */
 public class AgregarProducto extends javax.swing.JFrame {
-
-    /**
-     * Creates new form Login
-     */
+    
+    CategoriaBusiness categoriaBusiness = new CategoriaBusiness();
+    ArrayList<domain.Categoria> categorias;
+    ProductoBusiness productoBusiness = new ProductoBusiness();
+    
+    public void categorias(){
+        categorias = this.categoriaBusiness.getCategories();
+        
+        for (domain.Categoria categoria : categorias) {
+            jcbCategory.addItem(categoria.getNombre());               
+        }
+    }
+    
+    private boolean isNumeric(String cadena){
+	try {
+                Float.parseFloat(cadena);
+		return true;
+	} catch (NumberFormatException nfe){
+		return false;
+	}
+}
+    
     public AgregarProducto() {
         initComponents();
         ImageIcon image = new ImageIcon(getClass().getResource("/images/logo.png"));
         Icon logo = new ImageIcon(image.getImage().getScaledInstance(jlLogo.getWidth(), jlLogo.getHeight(), Image.SCALE_DEFAULT));
         jlLogo.setIcon(logo);
         this.repaint();
+        this.categorias();
     }
 
     /**
@@ -45,7 +58,6 @@ public class AgregarProducto extends javax.swing.JFrame {
         jtfName = new javax.swing.JTextField();
         jlCategory = new javax.swing.JLabel();
         jlImagen = new javax.swing.JLabel();
-        btnAdd = new javax.swing.JButton();
         btnSave = new javax.swing.JButton();
         btnBack = new javax.swing.JButton();
         jlDescription = new javax.swing.JLabel();
@@ -54,6 +66,9 @@ public class AgregarProducto extends javax.swing.JFrame {
         jScrollPane4 = new javax.swing.JScrollPane();
         jtaInformation = new javax.swing.JTextArea();
         jcbCategory = new javax.swing.JComboBox<>();
+        jtfImage = new javax.swing.JTextField();
+        jlMessageError = new javax.swing.JLabel();
+        jlMessageSuccess = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Registrar Producto");
@@ -84,14 +99,12 @@ public class AgregarProducto extends javax.swing.JFrame {
 
         jlImagen.setText("Imagen:");
 
-        btnAdd.setText("Agregar");
-        btnAdd.addActionListener(new java.awt.event.ActionListener() {
+        btnSave.setText("Guardar");
+        btnSave.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAddActionPerformed(evt);
+                btnSaveActionPerformed(evt);
             }
         });
-
-        btnSave.setText("Guardar");
 
         btnBack.setText("Volver");
         btnBack.addActionListener(new java.awt.event.ActionListener() {
@@ -114,7 +127,17 @@ public class AgregarProducto extends javax.swing.JFrame {
         jtaInformation.setRows(5);
         jScrollPane4.setViewportView(jtaInformation);
 
-        jcbCategory.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jcbCategory.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jcbCategoryActionPerformed(evt);
+            }
+        });
+
+        jlMessageError.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jlMessageError.setForeground(new java.awt.Color(255, 0, 0));
+
+        jlMessageSuccess.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jlMessageSuccess.setForeground(new java.awt.Color(0, 255, 0));
 
         javax.swing.GroupLayout PanelLayout = new javax.swing.GroupLayout(Panel);
         Panel.setLayout(PanelLayout);
@@ -124,59 +147,71 @@ public class AgregarProducto extends javax.swing.JFrame {
                 .addGroup(PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(PanelLayout.createSequentialGroup()
                         .addGap(82, 82, 82)
+                        .addGroup(PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jlInformation)
+                            .addComponent(jlName)
+                            .addGroup(PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jlCategory)
+                                .addComponent(jlDescription)))
                         .addGroup(PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(PanelLayout.createSequentialGroup()
-                                .addGroup(PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jlInformation)
-                                    .addComponent(jlName)
-                                    .addGroup(PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jlCategory)
-                                        .addComponent(jlDescription)))
+                                .addGap(18, 18, 18)
+                                .addComponent(jtfName, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jtfPrice, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(PanelLayout.createSequentialGroup()
+                                .addGap(35, 35, 35)
+                                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 674, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelLayout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 674, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGroup(PanelLayout.createSequentialGroup()
-                                        .addGap(18, 18, 18)
-                                        .addComponent(jtfName, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(jtfPrice, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(PanelLayout.createSequentialGroup()
-                                        .addGap(35, 35, 35)
-                                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 674, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelLayout.createSequentialGroup()
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addGroup(PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addComponent(jcbCategory, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 674, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                            .addGroup(PanelLayout.createSequentialGroup()
-                                .addGap(466, 466, 466)
-                                .addComponent(jlPrice)
-                                .addGap(48, 48, 48)
-                                .addComponent(jlImagen)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(btnAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(132, 132, 132))))
+                                            .addGroup(PanelLayout.createSequentialGroup()
+                                                .addGap(317, 317, 317)
+                                                .addComponent(jlPrice)
+                                                .addGap(48, 48, 48)
+                                                .addComponent(jlImagen)))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jtfImage))))))
                     .addGroup(PanelLayout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jlLogo, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(307, 307, 307)
-                        .addComponent(jlAdd))
+                        .addGroup(PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(PanelLayout.createSequentialGroup()
+                                .addGap(307, 307, 307)
+                                .addComponent(jlAdd))
+                            .addGroup(PanelLayout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jlMessageSuccess))))
                     .addGroup(PanelLayout.createSequentialGroup()
                         .addGap(318, 318, 318)
                         .addComponent(btnSave)
                         .addGap(262, 262, 262)
-                        .addComponent(btnBack)))
+                        .addComponent(btnBack))
+                    .addGroup(PanelLayout.createSequentialGroup()
+                        .addGap(142, 142, 142)
+                        .addComponent(jlMessageError)))
                 .addContainerGap(116, Short.MAX_VALUE))
         );
         PanelLayout.setVerticalGroup(
             PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(PanelLayout.createSequentialGroup()
                 .addGroup(PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jlAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(PanelLayout.createSequentialGroup()
+                        .addComponent(jlAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jlMessageSuccess))
                     .addGroup(PanelLayout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jlLogo, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jlMessageError)
+                .addGap(18, 18, 18)
                 .addGroup(PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(PanelLayout.createSequentialGroup()
-                        .addGap(38, 38, 38)
                         .addGroup(PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jlName)
                             .addComponent(jtfName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -190,15 +225,15 @@ public class AgregarProducto extends javax.swing.JFrame {
                         .addGroup(PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jlDescription)
                             .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 227, Short.MAX_VALUE))
-                    .addGroup(PanelLayout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelLayout.createSequentialGroup()
+                        .addGap(416, 416, 416)
                         .addGroup(PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(btnAdd)
                             .addComponent(jlImagen)
                             .addComponent(jlCategory)
-                            .addComponent(jcbCategory, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(140, 140, 140)))
+                            .addComponent(jcbCategory, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jtfImage, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(142, 142, 142)))
                 .addGroup(PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnSave)
                     .addComponent(btnBack))
@@ -227,10 +262,6 @@ public class AgregarProducto extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jtfNameActionPerformed
 
-    private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnAddActionPerformed
-
     private void jtfPriceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfPriceActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jtfPriceActionPerformed
@@ -241,6 +272,60 @@ public class AgregarProducto extends javax.swing.JFrame {
         producto.setLocationRelativeTo(null);
         producto.setVisible(true);
     }//GEN-LAST:event_btnBackActionPerformed
+
+    private void jcbCategoryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbCategoryActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jcbCategoryActionPerformed
+
+    private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
+        
+        String nombre = jtfName.getText();
+        String informacion = jtaInformation.getText();
+        String descripcion = jtaDescription.getText();
+        String jcbCateg = (String) jcbCategory.getSelectedItem();
+        String imagen = jtfImage.getText();
+        String precioString = jtfPrice.getText();
+        
+        domain.Producto producto = new domain.Producto();
+        
+        for (domain.Categoria categoria : categorias) {
+            if (jcbCateg.equals(categoria.getNombre())) {
+                producto.setCategoria(categoria);
+            }
+        }
+        
+        if (nombre.equals("") || informacion.equals("") || descripcion.equals("") || imagen.equals("") || precioString.equals("")) {
+            jlMessageError.setText("Llene todos los campos por favor.");
+            jlMessageSuccess.setText(""); 
+        }else{
+            if (!this.isNumeric(jtfPrice.getText())) {
+                jlMessageError.setText("El precio debe ser un número.");
+                jlMessageSuccess.setText(""); 
+            }else{
+            float precio = Float.parseFloat(jtfPrice.getText());
+            producto.setNombre(nombre);
+            producto.setInformacionNutricional(informacion);
+            producto.setDescripcion(descripcion);
+            producto.setUrlImagen(imagen);
+            producto.setPrecio(precio);
+            
+            if (this.productoBusiness.addProduct(producto) == 1) {
+                jlMessageSuccess.setText("Se ingresó correctamente el producto.");  
+                jlMessageError.setText("");
+            }else{
+                jlMessageError.setText("Hubo un problema al ingresar el producto, intenta de nuevo.");
+                jlMessageSuccess.setText(""); 
+            }
+            }
+        }
+        jtfPrice.setText("");
+        jtfName.setText("");
+        jtaInformation.setText("");
+        jtaDescription.setText("");
+        jtfImage.setText("");
+        
+        
+    }//GEN-LAST:event_btnSaveActionPerformed
 
     /**
      * @param args the command line arguments
@@ -286,7 +371,6 @@ public class AgregarProducto extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel Panel;
-    private javax.swing.JButton btnAdd;
     private javax.swing.JButton btnBack;
     private javax.swing.JButton btnSave;
     private javax.swing.JScrollPane jScrollPane3;
@@ -298,10 +382,13 @@ public class AgregarProducto extends javax.swing.JFrame {
     private javax.swing.JLabel jlImagen;
     private javax.swing.JLabel jlInformation;
     private javax.swing.JLabel jlLogo;
+    private javax.swing.JLabel jlMessageError;
+    private javax.swing.JLabel jlMessageSuccess;
     private javax.swing.JLabel jlName;
     private javax.swing.JLabel jlPrice;
     private javax.swing.JTextArea jtaDescription;
     private javax.swing.JTextArea jtaInformation;
+    private javax.swing.JTextField jtfImage;
     private javax.swing.JTextField jtfName;
     private javax.swing.JTextField jtfPrice;
     // End of variables declaration//GEN-END:variables

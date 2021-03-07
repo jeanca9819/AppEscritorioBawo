@@ -5,16 +5,15 @@ import com.mysql.jdbc.Connection;
 import domain.Categoria;
 import java.sql.ResultSet;
 import java.util.ArrayList;
-import java.util.List;
 
 public class CategoriaData {
  
     ConexionBD conexionBD = new ConexionBD();
     Connection connection = conexionBD.conexion();
     
-    public List<Categoria> getCategories(){
-        List<Categoria> categorias = new ArrayList<>();
- 
+    public ArrayList<Categoria> getCategories(){
+        ArrayList<Categoria> categorias = new ArrayList<Categoria>();
+        
         String query = "{ call getAllCategorias() }";
         ResultSet rs;
         
@@ -22,7 +21,13 @@ public class CategoriaData {
             CallableStatement stmt = (CallableStatement) connection.prepareCall(query);
             rs = stmt.executeQuery();
             while (rs.next()) {
+                Categoria categoria = new Categoria();
+                categoria.setCodigo(rs.getInt("codigo"));
+                categoria.setNombre(rs.getString("nombre"));
+                categoria.setVisibilidad(rs.getBoolean("visibilidad"));
+                categorias.add(categoria);
             }
+            rs.close();
         }
         catch (Exception e){
             System.out.println("Error de conexion" + e);

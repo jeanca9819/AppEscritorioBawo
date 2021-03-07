@@ -2,12 +2,56 @@ package gui;
 
 import business.CategoriaBusiness;
 import java.awt.Image;
+import java.util.ArrayList;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 
 public class Categoria extends javax.swing.JFrame {
 
+    DefaultTableModel modelo = new DefaultTableModel();
     CategoriaBusiness categoriaBusiness = new CategoriaBusiness();
+    
+    public void columnas(){
+        ArrayList<Object> nombreColumna = new ArrayList<Object>();
+        nombreColumna.add("Código");
+        nombreColumna.add("Nombre");
+        nombreColumna.add("Visibilidad");
+        
+        for (Object columna : nombreColumna) {
+            modelo.addColumn(columna);
+        }
+        
+        this.jtCategory.setModel(modelo);
+    }
+   
+    public void cargarDatos() {
+        
+        ArrayList<domain.Categoria> categorias = this.categoriaBusiness.getCategories();
+        
+        for (domain.Categoria categoria : categorias) {
+            Object[] categoria2 = new Object[]{
+                categoria.getCodigo(),
+                categoria.getNombre(),
+                categoria.isVisibilidad()
+            };
+            modelo.addRow(categoria2);
+        }
+        
+        this.jtCategory.setModel(modelo);
+        
+    }
+    
+    public void limpiarModelo() {
+        
+        if (modelo.getRowCount() > 0) {
+            for (int i = modelo.getRowCount() - 1; i > -1; i--) {
+                modelo.removeRow(i);
+            }
+        }
+    }
+    
     
     public Categoria() {
         initComponents();
@@ -15,6 +59,8 @@ public class Categoria extends javax.swing.JFrame {
         Icon logo = new ImageIcon(image.getImage().getScaledInstance(jlLogo.getWidth(), jlLogo.getHeight(), Image.SCALE_DEFAULT));
         jlLogo.setIcon(logo);
         this.repaint();
+        this.columnas();
+        this.cargarDatos();
     }
 
     /**
@@ -164,6 +210,7 @@ public class Categoria extends javax.swing.JFrame {
         this.setVisible(false);
         Principal main = new Principal();
         main.setLocationRelativeTo(null);
+        main.setVisible(true);
     }//GEN-LAST:event_btnBackActionPerformed
 
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
@@ -176,6 +223,8 @@ public class Categoria extends javax.swing.JFrame {
             if (this.categoriaBusiness.addCategory(categoria) == 1) {
                 jlMessageSuccess.setText("Se ingresó correctamente la categoría.");  
                 jlMessageError.setText("");
+                this.limpiarModelo();
+                this.cargarDatos();
             }else{
                 jlMessageError.setText("Hubo un problema al ingresar la categoría, intenta de nuevo.");
                 jlMessageSuccess.setText(""); 

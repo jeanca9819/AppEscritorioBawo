@@ -31,7 +31,7 @@ public class UsuarioData {
                 result = false;
                 
             }
-            
+            rs.close();
         }
         catch (Exception e){
             System.out.println("Error de conexion" + e);

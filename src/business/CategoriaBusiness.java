@@ -2,13 +2,13 @@ package business;
 
 import data.CategoriaData;
 import domain.Categoria;
-import java.util.List;
+import java.util.ArrayList;
 
 public class CategoriaBusiness {
     
     CategoriaData categoriaData = new CategoriaData();
     
-    public List<Categoria> getCategories(){
+    public ArrayList<Categoria> getCategories(){
     return this.categoriaData.getCategories();
     }
     
