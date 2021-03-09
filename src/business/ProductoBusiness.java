@@ -2,13 +2,13 @@ package business;
 
 import data.ProductoData;
 import domain.Producto;
-import java.util.List;
+import java.util.ArrayList;
 
 public class ProductoBusiness {
         
     ProductoData productoData = new ProductoData();
     
-    public List<Producto> getProducts(){
+    public ArrayList<Producto> getProducts(){
     return this.productoData.getProducts();
     }
     

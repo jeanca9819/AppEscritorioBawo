@@ -1,29 +1,57 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package gui;
 
+import business.ProductoBusiness;
 import java.awt.Image;
+import java.util.ArrayList;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
+import javax.swing.table.DefaultTableModel;
 
-/**
- *
- * @author jeanc
- */
 public class Producto extends javax.swing.JFrame {
 
-    /**
-     * Creates new form Login
-     */
+     DefaultTableModel modelo = new DefaultTableModel();
+     ProductoBusiness productoBusiness = new ProductoBusiness();
+    
+         public void columnas(){
+        ArrayList<Object> nombreColumna = new ArrayList<Object>();
+        nombreColumna.add("Código");
+        nombreColumna.add("Nombre");
+        nombreColumna.add("Precio");
+        nombreColumna.add("Categoría");
+        
+        for (Object columna : nombreColumna) {
+            modelo.addColumn(columna);
+        }
+        
+        this.jtProducts.setModel(modelo);
+    }
+         
+             public void cargarDatos() {
+        
+        ArrayList<domain.Producto> productos = this.productoBusiness.getProducts();
+        
+        for (domain.Producto producto : productos) {
+            Object[] producto2 = new Object[]{
+                producto.getCodigo(),
+                producto.getNombre(),
+                producto.getPrecio(),
+                producto.getCategoria().getNombre()
+            };
+            modelo.addRow(producto2);
+        }
+        
+        this.jtProducts.setModel(modelo);
+        
+    }
+     
     public Producto() {
         initComponents();
         ImageIcon image = new ImageIcon(getClass().getResource("/images/logo.png"));
         Icon logo = new ImageIcon(image.getImage().getScaledInstance(jlLogo.getWidth(), jlLogo.getHeight(), Image.SCALE_DEFAULT));
         jlLogo.setIcon(logo);
         this.repaint();
+        this.columnas();
+        this.cargarDatos();
     }
 
     /**
