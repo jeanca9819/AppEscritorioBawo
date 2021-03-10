@@ -13,12 +13,12 @@ import javax.swing.ImageIcon;
  *
  * @author jeanc
  */
-public class ActualizarProducto extends javax.swing.JFrame {
+public class ActualizarProveedor extends javax.swing.JFrame {
 
     /**
      * Creates new form Login
      */
-    public ActualizarProducto() {
+    public ActualizarProveedor() {
         initComponents();
         ImageIcon image = new ImageIcon(getClass().getResource("/images/logo.png"));
         Icon logo = new ImageIcon(image.getImage().getScaledInstance(jlLogo.getWidth(), jlLogo.getHeight(), Image.SCALE_DEFAULT));
@@ -41,19 +41,12 @@ public class ActualizarProducto extends javax.swing.JFrame {
         jlName = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
         jtaDescription = new javax.swing.JTextArea();
-        jlInformation = new javax.swing.JLabel();
         jtfName = new javax.swing.JTextField();
-        jlCategory = new javax.swing.JLabel();
         jlImagen = new javax.swing.JLabel();
         btnUpdate = new javax.swing.JButton();
         btnBack = new javax.swing.JButton();
         jlDescription = new javax.swing.JLabel();
-        jlPrice = new javax.swing.JLabel();
-        jtfPrice = new javax.swing.JTextField();
-        jScrollPane4 = new javax.swing.JScrollPane();
-        jtaInformation = new javax.swing.JTextArea();
-        jcbCategory = new javax.swing.JComboBox<>();
-        jtfName1 = new javax.swing.JTextField();
+        jtfImage = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Actualizar Producto");
@@ -64,7 +57,7 @@ public class ActualizarProducto extends javax.swing.JFrame {
         Panel.setBackground(new java.awt.Color(244, 130, 50));
 
         jlUpdate.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jlUpdate.setText("Actualizar Producto");
+        jlUpdate.setText("Actualizar Proveedor");
 
         jlName.setText("Nombre:");
 
@@ -72,15 +65,11 @@ public class ActualizarProducto extends javax.swing.JFrame {
         jtaDescription.setRows(5);
         jScrollPane3.setViewportView(jtaDescription);
 
-        jlInformation.setText("Información Nutricional:");
-
         jtfName.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jtfNameActionPerformed(evt);
             }
         });
-
-        jlCategory.setText("Categoría:");
 
         jlImagen.setText("Imagen:");
 
@@ -95,23 +84,9 @@ public class ActualizarProducto extends javax.swing.JFrame {
 
         jlDescription.setText("Descripción: ");
 
-        jlPrice.setText("Precio:");
-
-        jtfPrice.addActionListener(new java.awt.event.ActionListener() {
+        jtfImage.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jtfPriceActionPerformed(evt);
-            }
-        });
-
-        jtaInformation.setColumns(20);
-        jtaInformation.setRows(5);
-        jScrollPane4.setViewportView(jtaInformation);
-
-        jcbCategory.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
-        jtfName1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jtfName1ActionPerformed(evt);
+                jtfImageActionPerformed(evt);
             }
         });
 
@@ -122,47 +97,27 @@ public class ActualizarProducto extends javax.swing.JFrame {
             .addGroup(PanelLayout.createSequentialGroup()
                 .addGroup(PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(PanelLayout.createSequentialGroup()
-                        .addGap(82, 82, 82)
+                        .addGap(135, 135, 135)
                         .addGroup(PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jlInformation)
                             .addComponent(jlName)
-                            .addGroup(PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jlCategory)
-                                .addComponent(jlDescription)))
-                        .addGroup(PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(PanelLayout.createSequentialGroup()
-                                .addGap(18, 18, 18)
-                                .addComponent(jtfName, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jtfPrice, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(PanelLayout.createSequentialGroup()
-                                .addGap(35, 35, 35)
-                                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 674, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelLayout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 674, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(PanelLayout.createSequentialGroup()
-                                        .addGroup(PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jcbCategory, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addGroup(PanelLayout.createSequentialGroup()
-                                                .addGap(317, 317, 317)
-                                                .addComponent(jlPrice)
-                                                .addGap(48, 48, 48)
-                                                .addComponent(jlImagen)))
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jtfName1, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                            .addComponent(jlDescription)
+                            .addComponent(jlImagen))
+                        .addGap(18, 18, 18)
+                        .addGroup(PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 674, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jtfName, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jtfImage, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(PanelLayout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jlLogo, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(307, 307, 307)
                         .addComponent(jlUpdate))
                     .addGroup(PanelLayout.createSequentialGroup()
-                        .addGap(318, 318, 318)
+                        .addGap(300, 300, 300)
                         .addComponent(btnUpdate)
-                        .addGap(262, 262, 262)
+                        .addGap(267, 267, 267)
                         .addComponent(btnBack)))
-                .addContainerGap(116, Short.MAX_VALUE))
+                .addContainerGap(129, Short.MAX_VALUE))
         );
         PanelLayout.setVerticalGroup(
             PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -172,35 +127,23 @@ public class ActualizarProducto extends javax.swing.JFrame {
                     .addGroup(PanelLayout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jlLogo, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(38, 38, 38)
+                .addGroup(PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jlName)
+                    .addComponent(jtfName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(104, 104, 104)
                 .addGroup(PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(PanelLayout.createSequentialGroup()
-                        .addGap(38, 38, 38)
-                        .addGroup(PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jlName)
-                            .addComponent(jtfName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jlPrice)
-                            .addComponent(jtfPrice, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(66, 66, 66)
-                        .addGroup(PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jlInformation)
-                            .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(55, 55, 55)
-                        .addGroup(PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jlDescription)
-                            .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(53, 227, Short.MAX_VALUE))
-                    .addGroup(PanelLayout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jlImagen)
-                            .addComponent(jlCategory)
-                            .addComponent(jcbCategory, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jtfName1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(142, 142, 142)))
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jlDescription))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 68, Short.MAX_VALUE)
+                .addGroup(PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jlImagen)
+                    .addComponent(jtfImage, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(124, 124, 124)
                 .addGroup(PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnUpdate)
                     .addComponent(btnBack))
-                .addContainerGap(128, Short.MAX_VALUE))
+                .addContainerGap(256, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -209,7 +152,7 @@ public class ActualizarProducto extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(Panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addGap(0, 4, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -225,20 +168,16 @@ public class ActualizarProducto extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jtfNameActionPerformed
 
-    private void jtfPriceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfPriceActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jtfPriceActionPerformed
-
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
-        this.setVisible(false);
-        Producto producto = new Producto();
-        producto.setLocationRelativeTo(null);
-        producto.setVisible(true);
+       this.setVisible(false);
+        Proveedor proveedor = new Proveedor();
+        proveedor.setLocationRelativeTo(null);
+        proveedor.setVisible(true);
     }//GEN-LAST:event_btnBackActionPerformed
 
-    private void jtfName1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfName1ActionPerformed
+    private void jtfImageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfImageActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jtfName1ActionPerformed
+    }//GEN-LAST:event_jtfImageActionPerformed
 
     /**
      * @param args the command line arguments
@@ -257,14 +196,30 @@ public class ActualizarProducto extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ActualizarProducto.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ActualizarProveedor.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ActualizarProducto.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ActualizarProveedor.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ActualizarProducto.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ActualizarProveedor.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(ActualizarProducto.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ActualizarProveedor.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
@@ -285,7 +240,7 @@ public class ActualizarProducto extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new ActualizarProducto().setVisible(true);
+                new ActualizarProveedor().setVisible(true);
             }
         });
     }
@@ -295,20 +250,13 @@ public class ActualizarProducto extends javax.swing.JFrame {
     private javax.swing.JButton btnBack;
     private javax.swing.JButton btnUpdate;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JScrollPane jScrollPane4;
-    private javax.swing.JComboBox<String> jcbCategory;
-    private javax.swing.JLabel jlCategory;
     private javax.swing.JLabel jlDescription;
     private javax.swing.JLabel jlImagen;
-    private javax.swing.JLabel jlInformation;
     private javax.swing.JLabel jlLogo;
     private javax.swing.JLabel jlName;
-    private javax.swing.JLabel jlPrice;
     private javax.swing.JLabel jlUpdate;
     private javax.swing.JTextArea jtaDescription;
-    private javax.swing.JTextArea jtaInformation;
+    private javax.swing.JTextField jtfImage;
     private javax.swing.JTextField jtfName;
-    private javax.swing.JTextField jtfName1;
-    private javax.swing.JTextField jtfPrice;
     // End of variables declaration//GEN-END:variables
 }
