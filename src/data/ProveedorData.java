@@ -23,7 +23,7 @@ public class ProveedorData {
                 proveedor.setCodigo(rs.getInt("codigo"));
                 proveedor.setNombre(rs.getString("nombre"));
                 proveedor.setDescripcion(rs.getString("descripcion"));
-                proveedor.setUrlImagen(rs.getString("imagen"));
+                proveedor.setUrlImagen(rs.getString("url_imagen"));
                 
                 proveedores.add(proveedor);
             }
@@ -44,8 +44,8 @@ public class ProveedorData {
         try{
             CallableStatement stmt = (CallableStatement) connection.prepareCall(query);
             stmt.setString(1, proveedor.getNombre());
-            stmt.setString(4, proveedor.getDescripcion());
-            stmt.setString(5, proveedor.getUrlImagen());
+            stmt.setString(2, proveedor.getDescripcion());
+            stmt.setString(3, proveedor.getUrlImagen());
             rs = stmt.executeQuery();
             result = 1;
         }

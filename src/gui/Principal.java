@@ -43,6 +43,7 @@ public class Principal extends javax.swing.JFrame {
         btnProducts = new javax.swing.JButton();
         btLog = new javax.swing.JButton();
         btnProveedores = new javax.swing.JButton();
+        btnImagenes = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Principal");
@@ -62,7 +63,7 @@ public class Principal extends javax.swing.JFrame {
             }
         });
 
-        btnCategory.setText("Categoría");
+        btnCategory.setText("Categorías");
         btnCategory.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCategoryActionPerformed(evt);
@@ -83,10 +84,17 @@ public class Principal extends javax.swing.JFrame {
             }
         });
 
-        btnProveedores.setText("Proveedor");
+        btnProveedores.setText("Proveedores");
         btnProveedores.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnProveedoresActionPerformed(evt);
+            }
+        });
+
+        btnImagenes.setText("Imágenes");
+        btnImagenes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnImagenesActionPerformed(evt);
             }
         });
 
@@ -107,13 +115,13 @@ public class Principal extends javax.swing.JFrame {
                 .addGap(98, 98, 98)
                 .addComponent(jlLogo, javax.swing.GroupLayout.PREFERRED_SIZE, 374, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(212, 212, 212)
-                .addGroup(PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnProveedores, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnProducts, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(btnBusiness, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnCategory, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(240, Short.MAX_VALUE))
+                .addGroup(PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(btnProveedores, javax.swing.GroupLayout.DEFAULT_SIZE, 110, Short.MAX_VALUE)
+                    .addComponent(btnProducts, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnCategory, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnBusiness, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnImagenes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(230, Short.MAX_VALUE))
         );
         PanelLayout.setVerticalGroup(
             PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -129,14 +137,15 @@ public class Principal extends javax.swing.JFrame {
                         .addComponent(jlModules, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(44, 44, 44)
                         .addComponent(btnBusiness, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(57, 57, 57)
                         .addComponent(btnCategory, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(43, 43, 43)))
-                .addGap(51, 51, 51)
-                .addComponent(btnProducts, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 105, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 55, Short.MAX_VALUE)
+                        .addComponent(btnProducts, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(62, 62, 62)
                 .addComponent(btnProveedores, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(98, 98, 98))
+                .addGap(72, 72, 72)
+                .addComponent(btnImagenes, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(111, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -192,6 +201,13 @@ public class Principal extends javax.swing.JFrame {
         proveedor.setVisible(true);
     }//GEN-LAST:event_btnProveedoresActionPerformed
 
+    private void btnImagenesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnImagenesActionPerformed
+        this.setVisible(false);
+        Imagen imagen = new Imagen();
+        imagen.setLocationRelativeTo(null);
+        imagen.setVisible(true);
+    }//GEN-LAST:event_btnImagenesActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -235,6 +251,7 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JButton btLog;
     private javax.swing.JButton btnBusiness;
     private javax.swing.JButton btnCategory;
+    private javax.swing.JButton btnImagenes;
     private javax.swing.JButton btnProducts;
     private javax.swing.JButton btnProveedores;
     private javax.swing.JLabel jlLogo;

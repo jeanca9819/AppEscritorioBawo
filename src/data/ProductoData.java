@@ -30,7 +30,7 @@ public class ProductoData {
                 producto.setUrlImagen(rs.getString("imagen"));
                 categoria.setCodigo(rs.getInt("codigo_categoria"));
                 categoria.setNombre(rs.getString("nombre_categoria"));
-                categoria.setVisibilidad(rs.getBoolean("visibilidad"));
+                categoria.setVisibilidad(rs.getBoolean("visibilidad_categoria"));
                 producto.setCategoria(categoria);
                 
                 productos.add(producto);

@@ -1,29 +1,37 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package gui;
 
+import business.EmpresaBusiness;
 import java.awt.Image;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 
-/**
- *
- * @author jeanc
- */
 public class Empresa extends javax.swing.JFrame {
 
-    /**
-     * Creates new form Login
-     */
+    EmpresaBusiness empresaBusiness = new EmpresaBusiness();
+    
+    public void llenarCampos(){
+        domain.Empresa empresa = this.empresaBusiness.getBusiness();
+        jtfName.setText(empresa.getNombre());
+        jtaVision.setText(empresa.getVision());
+        jtaMision.setText(empresa.getMision());
+        jtaHistory.setText(empresa.getHistoria());
+        jtfPhone1.setText(empresa.getTelefono1());
+        jtfPhone2.setText(empresa.getTelefono2());
+        jtfEmail.setText(empresa.getCorreo());
+        jtaAddress.setText(empresa.getDireccion());
+        jtfFacebook.setText(empresa.getFacebook());
+        jtfInstagram.setText(empresa.getInstagram());
+        jtfWhatsapp.setText(empresa.getWhatsapp());
+        jtfLogo.setText(empresa.getUrlLogo());
+    }
+        
     public Empresa() {
         initComponents();
         ImageIcon image = new ImageIcon(getClass().getResource("/images/logo.png"));
         Icon logo = new ImageIcon(image.getImage().getScaledInstance(jlLogo.getWidth(), jlLogo.getHeight(), Image.SCALE_DEFAULT));
         jlLogo.setIcon(logo);
         this.repaint();
+        this.llenarCampos();
     }
 
     /**
@@ -59,12 +67,6 @@ public class Empresa extends javax.swing.JFrame {
         jtfPhone1 = new javax.swing.JTextField();
         jtfInstagram = new javax.swing.JTextField();
         jlAddress = new javax.swing.JLabel();
-        jtfAddress = new javax.swing.JTextField();
-        jlImagen = new javax.swing.JLabel();
-        btnAdd = new javax.swing.JButton();
-        btnDelete = new javax.swing.JButton();
-        jScrollPane5 = new javax.swing.JScrollPane();
-        listImagen = new javax.swing.JList<>();
         btnUpdate = new javax.swing.JButton();
         btnBack = new javax.swing.JButton();
         jlPhone2 = new javax.swing.JLabel();
@@ -72,10 +74,10 @@ public class Empresa extends javax.swing.JFrame {
         jlName = new javax.swing.JLabel();
         jtfName = new javax.swing.JTextField();
         jtfLogo = new javax.swing.JTextField();
-        jlNameImage = new javax.swing.JLabel();
-        jlURL = new javax.swing.JLabel();
-        jtfURL = new javax.swing.JTextField();
-        jtfNameImage = new javax.swing.JTextField();
+        jlMessageSuccess = new javax.swing.JLabel();
+        jlMessageError = new javax.swing.JLabel();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        jtaAddress = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Empresa");
@@ -150,26 +152,12 @@ public class Empresa extends javax.swing.JFrame {
 
         jlAddress.setText("Dirreción:");
 
-        jtfAddress.addActionListener(new java.awt.event.ActionListener() {
+        btnUpdate.setText("Actualizar");
+        btnUpdate.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jtfAddressActionPerformed(evt);
+                btnUpdateActionPerformed(evt);
             }
         });
-
-        jlImagen.setText("Imágenes");
-
-        btnAdd.setText("Agregar");
-
-        btnDelete.setText("Quitar");
-
-        listImagen.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
-        jScrollPane5.setViewportView(listImagen);
-
-        btnUpdate.setText("Actualizar");
 
         btnBack.setText("Volver");
         btnBack.addActionListener(new java.awt.event.ActionListener() {
@@ -186,7 +174,7 @@ public class Empresa extends javax.swing.JFrame {
             }
         });
 
-        jlName.setText("Nombre de la empresa: ");
+        jlName.setText("Nombre: ");
 
         jtfName.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -194,9 +182,15 @@ public class Empresa extends javax.swing.JFrame {
             }
         });
 
-        jlNameImage.setText("Nombre:");
+        jlMessageSuccess.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jlMessageSuccess.setForeground(new java.awt.Color(51, 255, 0));
 
-        jlURL.setText("URL:");
+        jlMessageError.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jlMessageError.setForeground(new java.awt.Color(255, 0, 0));
+
+        jtaAddress.setColumns(20);
+        jtaAddress.setRows(5);
+        jScrollPane4.setViewportView(jtaAddress);
 
         javax.swing.GroupLayout PanelLayout = new javax.swing.GroupLayout(Panel);
         Panel.setLayout(PanelLayout);
@@ -205,187 +199,130 @@ public class Empresa extends javax.swing.JFrame {
             .addGroup(PanelLayout.createSequentialGroup()
                 .addGroup(PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(PanelLayout.createSequentialGroup()
-                        .addGap(22, 22, 22)
                         .addGroup(PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(jtfFacebook, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGroup(PanelLayout.createSequentialGroup()
-                                    .addComponent(jlPhone2)
-                                    .addGap(18, 18, 18)
-                                    .addComponent(jtfPhone2, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addComponent(jlFacebook)
                             .addGroup(PanelLayout.createSequentialGroup()
+                                .addGap(22, 22, 22)
                                 .addGroup(PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(PanelLayout.createSequentialGroup()
-                                        .addComponent(jlEmail)
-                                        .addGap(29, 29, 29))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelLayout.createSequentialGroup()
-                                        .addComponent(jlPhone1)
-                                        .addGap(18, 18, 18)))
-                                .addGroup(PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jtfPhone1, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jtfEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(PanelLayout.createSequentialGroup()
-                                .addGroup(PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addGroup(PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGap(506, 506, 506)
                                         .addGroup(PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                            .addGroup(PanelLayout.createSequentialGroup()
-                                                .addComponent(jlMision)
-                                                .addGap(18, 18, 18))
-                                            .addGroup(PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                .addGroup(PanelLayout.createSequentialGroup()
-                                                    .addComponent(jlWhatsapp)
-                                                    .addGap(18, 18, 18)
-                                                    .addComponent(jtfWhatsapp, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                                .addGroup(PanelLayout.createSequentialGroup()
-                                                    .addGroup(PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                                        .addComponent(jlInstagram)
-                                                        .addGroup(PanelLayout.createSequentialGroup()
-                                                            .addComponent(jlAddress)
-                                                            .addGap(7, 7, 7)))
-                                                    .addGap(18, 18, 18)
-                                                    .addGroup(PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                                        .addGroup(PanelLayout.createSequentialGroup()
-                                                            .addComponent(jtfInstagram, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                            .addGap(178, 178, 178))
-                                                        .addGroup(PanelLayout.createSequentialGroup()
-                                                            .addComponent(jtfAddress, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                            .addComponent(jlLogo2))))))
-                                        .addGroup(PanelLayout.createSequentialGroup()
+                                            .addComponent(jlAddress)
+                                            .addComponent(jlHistory)
+                                            .addComponent(jlMision)))
+                                    .addGroup(PanelLayout.createSequentialGroup()
+                                        .addGroup(PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jlPhone1)
                                             .addComponent(jlVision)
-                                            .addGap(42, 42, 42)
-                                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                    .addGroup(PanelLayout.createSequentialGroup()
+                                            .addComponent(jlPhone2)
+                                            .addComponent(jlName)
+                                            .addComponent(jlFacebook)
+                                            .addComponent(jlInstagram)
+                                            .addComponent(jlWhatsapp))
+                                        .addGap(50, 50, 50)
                                         .addGroup(PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jlNameImage)
-                                            .addComponent(jlHistory))
-                                        .addGap(17, 17, 17)))
-                                .addGap(13, 13, 13)
-                                .addGroup(PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addGroup(PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                                .addComponent(jtfPhone1, javax.swing.GroupLayout.DEFAULT_SIZE, 330, Short.MAX_VALUE)
+                                                .addComponent(jtfPhone2, javax.swing.GroupLayout.DEFAULT_SIZE, 330, Short.MAX_VALUE)
+                                                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 330, Short.MAX_VALUE)
+                                                .addComponent(jtfName)
+                                                .addComponent(jtfFacebook)
+                                                .addComponent(jtfWhatsapp, javax.swing.GroupLayout.DEFAULT_SIZE, 330, Short.MAX_VALUE)
+                                                .addComponent(jtfInstagram))
+                                            .addComponent(jlMessageSuccess)
+                                            .addComponent(jlMessageError, javax.swing.GroupLayout.PREFERRED_SIZE, 0, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                     .addGroup(PanelLayout.createSequentialGroup()
-                                        .addGap(28, 28, 28)
-                                        .addGroup(PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addGroup(PanelLayout.createSequentialGroup()
-                                                .addComponent(btnUpdate)
-                                                .addGap(113, 113, 113)
-                                                .addComponent(btnBack))
-                                            .addComponent(jtfLogo, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                    .addGroup(PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                        .addComponent(btnAdd)
-                                        .addGroup(PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                            .addGroup(PanelLayout.createSequentialGroup()
-                                                .addComponent(jScrollPane5)
-                                                .addGap(18, 18, 18)
-                                                .addComponent(btnDelete))
-                                            .addGroup(PanelLayout.createSequentialGroup()
-                                                .addComponent(jtfNameImage, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addGap(44, 44, 44)
-                                                .addComponent(jlURL)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                                .addComponent(jtfURL, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE))))))))
+                                        .addGap(521, 521, 521)
+                                        .addComponent(jlEmail))))
+                            .addGroup(PanelLayout.createSequentialGroup()
+                                .addGap(268, 268, 268)
+                                .addComponent(btnUpdate))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelLayout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(jlLogo2)))
+                        .addGap(18, 18, 18)
+                        .addGroup(PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jtfEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(PanelLayout.createSequentialGroup()
+                                .addGap(65, 65, 65)
+                                .addComponent(btnBack))
+                            .addComponent(jtfLogo, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(PanelLayout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jlLogo, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGroup(PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(PanelLayout.createSequentialGroup()
-                                .addGap(230, 230, 230)
-                                .addComponent(jlName)
-                                .addGap(6, 6, 6)
-                                .addComponent(jtfName, javax.swing.GroupLayout.PREFERRED_SIZE, 237, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(PanelLayout.createSequentialGroup()
-                                .addGap(264, 264, 264)
-                                .addComponent(jlUpdate)))))
-                .addContainerGap(77, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelLayout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jlImagen)
-                .addGap(215, 215, 215))
+                        .addGap(264, 264, 264)
+                        .addComponent(jlUpdate)))
+                .addContainerGap(83, Short.MAX_VALUE))
         );
         PanelLayout.setVerticalGroup(
             PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(PanelLayout.createSequentialGroup()
                 .addGroup(PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(PanelLayout.createSequentialGroup()
-                        .addComponent(jlUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(17, 17, 17)
-                        .addGroup(PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jlName)
-                            .addComponent(jtfName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jlUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(PanelLayout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jlLogo, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(30, 30, 30)
-                .addGroup(PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jlVision)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jlMision)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(39, 39, 39)
-                .addGroup(PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(PanelLayout.createSequentialGroup()
-                        .addGroup(PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jlEmail)
-                            .addComponent(jtfEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jlHistory))
-                        .addGap(56, 56, 56)
-                        .addGroup(PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jtfPhone1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jlPhone1)))
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(20, 20, 20)
-                .addComponent(jlImagen)
-                .addGap(18, 18, 18)
-                .addGroup(PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(PanelLayout.createSequentialGroup()
-                        .addGroup(PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jtfPhone2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jlPhone2))
-                        .addGap(14, 14, 14))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelLayout.createSequentialGroup()
-                        .addGroup(PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jlNameImage)
-                            .addComponent(jlURL)
-                            .addComponent(jtfURL, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jtfNameImage, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(11, 11, 11)))
-                .addComponent(btnAdd)
-                .addGap(18, 18, 18)
-                .addGroup(PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(PanelLayout.createSequentialGroup()
-                        .addGroup(PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jlFacebook)
-                            .addComponent(jtfFacebook, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(PanelLayout.createSequentialGroup()
-                                .addGap(44, 44, 44)
-                                .addGroup(PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jlInstagram)
-                                    .addComponent(jtfInstagram, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(46, 46, 46)
-                                .addGroup(PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jlAddress)
-                                    .addComponent(jtfAddress, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(PanelLayout.createSequentialGroup()
-                                .addGap(31, 31, 31)
-                                .addComponent(btnDelete))))
-                    .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 17, Short.MAX_VALUE)
-                .addGroup(PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(PanelLayout.createSequentialGroup()
-                        .addComponent(jlLogo2)
-                        .addGap(24, 24, 24)
-                        .addGroup(PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jlWhatsapp)
-                            .addComponent(jtfWhatsapp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(jtfLogo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jtfName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jlName))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(PanelLayout.createSequentialGroup()
+                        .addGap(40, 40, 40)
+                        .addGroup(PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jlVision))
+                        .addGap(41, 41, 41)
+                        .addGroup(PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jlPhone1)
+                            .addComponent(jtfPhone1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelLayout.createSequentialGroup()
+                        .addGroup(PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jlMision))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jlHistory)
+                            .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(54, 54, 54)
+                .addGroup(PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jtfPhone2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jlPhone2)
+                        .addComponent(jlAddress))
+                    .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(54, 54, 54)
+                .addGroup(PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jlFacebook)
+                    .addComponent(jtfFacebook, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(14, 14, 14)
+                .addGroup(PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jlEmail)
+                    .addComponent(jtfEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(50, 50, 50)
+                .addGroup(PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jtfInstagram, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jlInstagram))
+                .addGap(40, 40, 40)
+                .addGroup(PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jlLogo2)
+                    .addComponent(jtfLogo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(24, 24, 24)
+                .addGroup(PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jlWhatsapp)
+                    .addComponent(jtfWhatsapp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
+                .addComponent(jlMessageSuccess)
+                .addGap(36, 36, 36)
+                .addComponent(jlMessageError)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 41, Short.MAX_VALUE)
                 .addGroup(PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnUpdate)
                     .addComponent(btnBack))
-                .addContainerGap(71, Short.MAX_VALUE))
+                .addGap(29, 29, 29))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -398,9 +335,7 @@ public class Empresa extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(Panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(Panel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -426,10 +361,6 @@ public class Empresa extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jtfInstagramActionPerformed
 
-    private void jtfAddressActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfAddressActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jtfAddressActionPerformed
-
     private void jtfWhatsappActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfWhatsappActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jtfWhatsappActionPerformed
@@ -444,6 +375,50 @@ public class Empresa extends javax.swing.JFrame {
         main.setLocationRelativeTo(null);
         main.setVisible(true);
     }//GEN-LAST:event_btnBackActionPerformed
+
+    private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
+        String nombre = jtfName.getText();
+        String vision = jtaVision.getText();
+        String mision = jtaMision.getText();
+        String historia = jtaHistory.getText();
+        String telefono1 = jtfPhone1.getText();
+        String telefono2 = jtfPhone2.getText();
+        String correo = jtfEmail.getText();
+        String direccion = jtaAddress.getText();
+        String facebook = jtfFacebook.getText();
+        String instagram = jtfInstagram.getText();
+        String whatsapp = jtfWhatsapp.getText();
+        String logo = jtfLogo.getText();
+        
+        domain.Empresa empresa = new domain.Empresa();
+        
+        if (nombre.equals("") || vision.equals("") || mision.equals("") || historia.equals("") || telefono1.equals("") || telefono2.equals("") || correo.equals("") || direccion.equals("") || facebook.equals("") || instagram.equals("") || whatsapp.equals("") || logo.equals("")) {
+            jlMessageError.setText("Llene todos los campos por favor.");
+            jlMessageSuccess.setText(""); 
+        }else{
+            empresa.setNombre(nombre);
+            empresa.setVision(vision);
+            empresa.setMision(mision);
+            empresa.setHistoria(historia);
+            empresa.setTelefono1(telefono1);
+            empresa.setTelefono2(telefono2);
+            empresa.setCorreo(correo);
+            empresa.setDireccion(direccion);
+            empresa.setFacebook(facebook);
+            empresa.setInstagram(instagram);
+            empresa.setWhatsapp(whatsapp);
+            empresa.setUrlLogo(logo);
+            
+            if (this.empresaBusiness.updateBusiness(empresa) == 1) {
+                jlMessageSuccess.setText("Se actualizó correctamente la información de la empresa.");  
+                jlMessageError.setText("");
+            }else{
+                jlMessageError.setText("Hubo un problema al actualizar la información, intenta de nuevo.");
+                jlMessageSuccess.setText(""); 
+            }
+            
+        }
+    }//GEN-LAST:event_btnUpdateActionPerformed
 
     /**
      * @param args the command line arguments
@@ -485,45 +460,39 @@ public class Empresa extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel Panel;
-    private javax.swing.JButton btnAdd;
     private javax.swing.JButton btnBack;
-    private javax.swing.JButton btnDelete;
     private javax.swing.JButton btnUpdate;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JScrollPane jScrollPane5;
+    private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JLabel jlAddress;
     private javax.swing.JLabel jlEmail;
     private javax.swing.JLabel jlFacebook;
     private javax.swing.JLabel jlHistory;
-    private javax.swing.JLabel jlImagen;
     private javax.swing.JLabel jlInstagram;
     private javax.swing.JLabel jlLogo;
     private javax.swing.JLabel jlLogo2;
+    private javax.swing.JLabel jlMessageError;
+    private javax.swing.JLabel jlMessageSuccess;
     private javax.swing.JLabel jlMision;
     private javax.swing.JLabel jlName;
-    private javax.swing.JLabel jlNameImage;
     private javax.swing.JLabel jlPhone1;
     private javax.swing.JLabel jlPhone2;
-    private javax.swing.JLabel jlURL;
     private javax.swing.JLabel jlUpdate;
     private javax.swing.JLabel jlVision;
     private javax.swing.JLabel jlWhatsapp;
+    private javax.swing.JTextArea jtaAddress;
     private javax.swing.JTextArea jtaHistory;
     private javax.swing.JTextArea jtaMision;
     private javax.swing.JTextArea jtaVision;
-    private javax.swing.JTextField jtfAddress;
     private javax.swing.JTextField jtfEmail;
     private javax.swing.JTextField jtfFacebook;
     private javax.swing.JTextField jtfInstagram;
     private javax.swing.JTextField jtfLogo;
     private javax.swing.JTextField jtfName;
-    private javax.swing.JTextField jtfNameImage;
     private javax.swing.JTextField jtfPhone1;
     private javax.swing.JTextField jtfPhone2;
-    private javax.swing.JTextField jtfURL;
     private javax.swing.JTextField jtfWhatsapp;
-    private javax.swing.JList<String> listImagen;
     // End of variables declaration//GEN-END:variables
 }
